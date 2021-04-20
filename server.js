@@ -64,4 +64,32 @@ app.post("/login",(req,res)=>{
     })
 })
 
+app.post("/list",(req,res)=>{
+    console.log(req.body);
+    const tag1 = req.body.tag1;
+    const tag2 = req.body.tag2;
+    const tag3 = req.body.tag3;
+    const tag4 = req.body.tag4;
+    const tag5 = req.body.tag5;
+    const tag6 = req.body.tag6;
+    const tag7 = req.body.tag7;
+
+    console.log(tag1,tag2,tag3,tag4,tag5)
+    // var sql = 'Select * FROM playlist WHERE tag="happy"'
+    var sql = 'SELECT * FROM playlist WHERE tag="'+tag1+'" OR tag="'+tag2+'" OR tag="'+tag3+'" OR tag="'+tag4+'" OR tag="'+tag5+'" OR tag="'+tag6+'" OR tag="'+tag7+'";';
+    con.query(sql,(err,result)=>{
+        if(err){
+            console.log(err);
+            res.json({
+                success:false,
+                status:400
+            })
+        }
+        else{
+            console.log(result);
+            res.json(result)
+        }
+    })
+})
+
 app.listen(process.env.PORT||8000);
